@@ -1,0 +1,54 @@
+<nav class="navbar is-primary" role="navigation" aria-label="main navigation">
+  <div class="navbar-brand">
+    <a class="navbar-item" routerLink="home">
+      <img [src]="logoUrl" />
+    </a>
+
+    <a
+      role="button"
+      class="navbar-burger burger"
+      aria-label="menu"
+      aria-expanded="false"
+      data-target="navbarBasicExample"
+    >
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+    </a>
+  </div>
+
+  <div id="navbarBasicExample" class="navbar-menu">
+    <div class="navbar-start">
+      <a
+        *ngIf="isFeatureEnabled('sales')"
+        class="navbar-item"
+        routerLink="sales"
+        data-test="sales-link"
+      >
+        Vendas
+      </a>
+
+      <a
+        *ngIf="isFeatureEnabled('documentation')"
+        class="navbar-item"
+        routerLink="documentation"
+        data-test="documentation-link"
+      >
+        Documentação
+      </a>
+    </div>
+
+    <div class="navbar-end">
+      <div class="navbar-item">
+        <div class="buttons">
+          <a class="button is-primary">
+            <strong>Sign up</strong>
+          </a>
+          <a class="button is-light">
+            Log in
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>

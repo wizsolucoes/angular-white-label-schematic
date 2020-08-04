@@ -1,6 +1,6 @@
 {
-  "name": "hello",
-  "version": "0.0.0",
+  "name": "@wizsolucoes/angular-white-label",
+  "version": "1.0.0",
   "description": "A blank schematics",
   "scripts": {
     "build": "tsc -p tsconfig.json",
@@ -16,6 +16,7 @@
   "dependencies": {
     "@angular-devkit/core": "^10.0.5",
     "@angular-devkit/schematics": "^10.0.5",
+    "@schematics/angular": "^9.1.12",
     "typescript": "~3.9.7"
   },
   "devDependencies": {

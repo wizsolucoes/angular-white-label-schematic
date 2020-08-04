@@ -1,9 +1,13 @@
 {
   "$schema": "../node_modules/@angular-devkit/schematics/collection-schema.json",
   "schematics": {
-    "hello": {
+    "ng-add": {
       "description": "A blank schematic.",
-      "factory": "./hello/index#hello"
+      "factory": "./ng-add/index#ngAdd"
+    },
+    "white-label": {
+      "description": "A blank schematic.",
+      "factory": "./white-label/index#main"
     }
   }
 }
