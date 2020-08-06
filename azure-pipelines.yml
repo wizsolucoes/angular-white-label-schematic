@@ -21,17 +21,23 @@ stages:
             inputs:
               command: "install"
           - task: Npm@1
+            displayName: "Build"
+            inputs:
+              command: custom
+              verbose: false
+              customCommand: "run build"
+          - task: Npm@1
             displayName: "Test"
             inputs:
               command: "custom"
               verbose: false
               customCommand: "test"
           - task: Npm@1
-            displayName: "Build"
+            displayName: "Publish"
             inputs:
-              command: custom
-              verbose: false
-              customCommand: "run build"
+              command: "custom"
+              customCommand: "publish"
+              customEndpoint: "npmjs"
   - stage: Publish
     condition: and(succeeded(), eq(variables['build.sourceBranch'], 'refs/heads/master'))
     dependsOn: [Build]
