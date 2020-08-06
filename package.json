@@ -1,7 +1,11 @@
 {
   "name": "@wizsolucoes/angular-white-label",
   "version": "1.0.0",
-  "description": "A blank schematics",
+  "description": "Generates Wiz boilerplate Angular white-label application.",
+  "private": false,
+  "publishConfig": {
+    "access": "public"
+  },
   "scripts": {
     "build": "tsc -p tsconfig.json",
     "build:watch": "tsc -p tsconfig.json --watch",

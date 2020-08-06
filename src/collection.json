@@ -2,11 +2,11 @@
   "$schema": "../node_modules/@angular-devkit/schematics/collection-schema.json",
   "schematics": {
     "ng-add": {
-      "description": "A blank schematic.",
+      "description": "Ng Add Support",
       "factory": "./ng-add/index#ngAdd"
     },
     "white-label": {
-      "description": "A blank schematic.",
+      "description": "Generates Wiz boilerplate Angular white-label application.",
       "factory": "./white-label/index#main"
     }
   }
