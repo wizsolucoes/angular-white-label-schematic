@@ -27,13 +27,13 @@ export class MonitoringService {
     }
   }
 
-  logPageView(name?: string, uri?: string) {
+  logPageView(name?: string, uri?: string): void {
     if (this.appInsights) {
       this.appInsights.trackPageView({ name, uri });
     }
   }
 
-  logException(error: Error) {
+  logException(error: Error): void {
     const exception: IExceptionTelemetry = {
       exception: error,
     };
@@ -42,7 +42,7 @@ export class MonitoringService {
     }
   }
 
-  private createRouterSubscription() {
+  private createRouterSubscription(): void {
     this.router.events
       .pipe(filter((event) => event instanceof NavigationEnd))
       .subscribe((event: NavigationEnd) => {

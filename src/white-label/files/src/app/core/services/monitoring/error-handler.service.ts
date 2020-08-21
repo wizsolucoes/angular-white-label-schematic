@@ -13,7 +13,7 @@ export class ErrorHandlerService extends ErrorHandler {
     super();
   }
 
-  handleError(error: Error) {
+  handleError(error: Error): void {
     if (!this.environment.production) {
       console.error(error);
       return;

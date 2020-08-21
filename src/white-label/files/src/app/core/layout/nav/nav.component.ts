@@ -31,7 +31,7 @@ export class NavComponent implements OnInit {
     return !!this.features && this.features.includes(key);
   }
 
-  logOut() {
+  logOut(): void {
     this.sso.logOut();
     Util.windowReload();
   }

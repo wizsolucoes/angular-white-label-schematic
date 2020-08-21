@@ -21,11 +21,11 @@ export class ConfigurationService {
 
   private isCacheEnabled = true;
 
-  enableCache() {
+  enableCache(): void {
     this.isCacheEnabled = true;
   }
 
-  disableCache() {
+  disableCache(): void {
     this.isCacheEnabled = false;
   }
 

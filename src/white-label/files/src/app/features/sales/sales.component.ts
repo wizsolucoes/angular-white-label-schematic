@@ -17,7 +17,7 @@ export class SalesComponent {
 
   constructor(private simulationService: SimulationService) {}
 
-  onSubmit() {
+  onSubmit(): void {
     this.isLoadingSimulation = true;
 
     this.simulationService
