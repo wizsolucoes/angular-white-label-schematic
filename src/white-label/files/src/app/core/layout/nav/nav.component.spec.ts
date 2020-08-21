@@ -181,7 +181,7 @@ describe('NavComponent', () => {
 
 // Helper funtions
 
-function userIsLoggedIn() {
+function userIsLoggedIn(): void {
   spyOn(SSOConectorService, 'isLogged').and.returnValue({
     tokenType: 'foo',
     hash: 'foo',
@@ -190,6 +190,6 @@ function userIsLoggedIn() {
   });
 }
 
-function userIsLoggedOut() {
+function userIsLoggedOut(): void {
   spyOn(SSOConectorService, 'isLogged').and.returnValue(null);
 }

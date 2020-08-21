@@ -17,7 +17,7 @@ export class HomeComponent implements OnInit {
     this.isLoggedIn = !!SSOConectorService.isLogged();
   }
 
-  onSubmitLogin() {
+  onSubmitLogin(): void {
     this.isLoggingIn = true;
     this.sso
       .loginWithCredentials({

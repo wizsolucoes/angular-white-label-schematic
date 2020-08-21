@@ -1,5 +1,5 @@
 export class Util {
-  static windowReload() {
+  static windowReload(): void {
     window.location.reload();
   }
 }
