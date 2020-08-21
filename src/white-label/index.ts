@@ -29,6 +29,7 @@ export function main(_options: Schema): Rule {
   return (tree: Tree, _context: SchematicContext) => {
     return chain([
       addScripts(),
+      addHuskyHook(),
       addDependencies(),
       addBulmaCSS(_options),
       generateProjectFiles(_options),
@@ -102,6 +103,28 @@ function addScripts(): Rule {
     const packageJsonObject = JSON.parse(packageJsonBuffer.toString());
     const scripts = packageJsonObject.scripts;
     scripts["server"] = "json-server --watch server/db.json";
+
+    tree.overwrite("package.json", JSON.stringify(packageJsonObject, null, 2));
+
+    return tree;
+  };
+}
+
+function addHuskyHook(): Rule {
+  return (tree: Tree, _context: SchematicContext) => {
+    const packageJsonBuffer = tree.read("package.json");
+
+    if (!packageJsonBuffer) {
+      throw new SchematicsException("No package.json file found");
+    }
+
+    const packageJsonObject = JSON.parse(packageJsonBuffer.toString());
+
+    packageJsonObject["husky"] = {
+      hooks: {
+        "commit-msg": "commitlint -E HUSKY_GIT_PARAMS",
+      },
+    };
 
     tree.overwrite("package.json", JSON.stringify(packageJsonObject, null, 2));
 

@@ -1,30 +1,21 @@
 import { Component, OnInit } from '@angular/core';
-import { ConfigurationService } from 'src/app/core/services/configuration/configuration.service';
 import { SimulationService } from 'src/app/core/services/business/simulation/simulation.service';
 
 @Component({
   selector: 'app-sales',
   templateUrl: './sales.component.html',
-  styleUrls: ['./sales.component.css'],
+  styleUrls: ['./sales.component.scss'],
 })
-export class SalesComponent implements OnInit {
+export class SalesComponent {
   simulationResult: any;
   name: string;
   cpf: string;
   email: string;
   loanAmount: number;
   installments: number;
-  id: string;
   isLoadingSimulation: boolean;
 
-  constructor(
-    private simulationService: SimulationService,
-    private configurationService: ConfigurationService
-  ) {}
-
-  ngOnInit(): void {
-    this.id = this.configurationService.tenantId;
-  }
+  constructor(private simulationService: SimulationService) {}
 
   onSubmit() {
     this.isLoadingSimulation = true;

@@ -3,32 +3,43 @@
     <div class="columns">
       <div class="column">
         <div class="field">
-          <label class="label">Nome</label>
-          <div class="control">
-            <input class="input" type="text" name="name" [(ngModel)]="name" />
-          </div>
+          <label class="label"
+            >Nome
+            <div class="control">
+              <input class="input" type="text" name="name" [(ngModel)]="name" />
+            </div>
+          </label>
         </div>
       </div>
       <div class="column">
         <div class="field">
-          <label class="label">CPF</label>
-          <div class="control">
-            <input
-              class="input"
-              type="text"
-              name="cpf"
-              [(ngModel)]="cpf"
-              mask="CPF_CNPJ"
-            />
-          </div>
+          <label class="label"
+            >CPF
+            <div class="control">
+              <input
+                class="input"
+                type="text"
+                name="cpf"
+                [(ngModel)]="cpf"
+                mask="CPF_CNPJ"
+              />
+            </div>
+          </label>
         </div>
       </div>
       <div class="column">
         <div class="field">
-          <label class="label">E-mail</label>
-          <div class="control">
-            <input class="input" type="text" name="email" [(ngModel)]="email" />
-          </div>
+          <label class="label"
+            >E-mail
+            <div class="control">
+              <input
+                class="input"
+                type="text"
+                name="email"
+                [(ngModel)]="email"
+              />
+            </div>
+          </label>
         </div>
       </div>
     </div>
@@ -36,30 +47,34 @@
     <div class="columns">
       <div class="column">
         <div class="field">
-          <label class="label">Valor do empréstimo</label>
-          <div class="control">
-            <input
-              class="input"
-              currencyMask
-              name="loanAmount"
-              [(ngModel)]="loanAmount"
-              [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }"
-            />
-          </div>
+          <label class="label"
+            >Valor do empréstimo
+            <div class="control">
+              <input
+                class="input"
+                currencyMask
+                name="loanAmount"
+                [(ngModel)]="loanAmount"
+                [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }"
+              />
+            </div>
+          </label>
         </div>
       </div>
       <div class="column">
         <div class="field">
-          <label class="label">Quantidade de parcelas</label>
-          <div class="control">
-            <input
-              class="input"
-              type="number"
-              name="installments"
-              [min]="1"
-              [(ngModel)]="installments"
-            />
-          </div>
+          <label class="label"
+            >Quantidade de parcelas
+            <div class="control">
+              <input
+                class="input"
+                type="number"
+                name="installments"
+                [min]="1"
+                [(ngModel)]="installments"
+              />
+            </div>
+          </label>
         </div>
       </div>
       <div class="column"></div>
@@ -71,11 +86,9 @@
 
 <hr />
 
-<wiz-code-demo *ngIf="isLoadingSimulation">
-  <div style="width: 65px;">
-    <wiz-loading type="spinner-continuous"> </wiz-loading>
-  </div>
-</wiz-code-demo>
+<div *ngIf="isLoadingSimulation" style="width: 65px;">
+  <wiz-loading type="spinner-continuous"> </wiz-loading>
+</div>
 
 <div *ngIf="simulationResult">
   <table class="table is-bordered is-striped">
