@@ -2,25 +2,33 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { of } from 'rxjs';
 import { NavComponent } from './nav.component';
 import { ConfigurationService } from '../../services/configuration/configuration.service';
+import { SSOConectorService, NgxWizSSOModule } from '@wizsolucoes/ngx-wiz-sso';
+import { ssoConfig } from '../../../../config/sso_config';
+import { Util } from '../../../shared/utils/util';
 
 describe('NavComponent', () => {
   let component: NavComponent;
   let fixture: ComponentFixture<NavComponent>;
   let template: HTMLElement;
   let mockConfigService: jasmine.SpyObj<ConfigurationService>;
+  let mockSSO: jasmine.SpyObj<SSOConectorService>;
 
-  beforeEach(async(() => {
+  beforeEach(() => {
     mockConfigService = jasmine.createSpyObj('ConfigurationService', [
       'getConfig',
     ]);
 
+    mockSSO = jasmine.createSpyObj('mockSSO', ['logOut']);
+
     TestBed.configureTestingModule({
+      imports: [NgxWizSSOModule.forRoot(ssoConfig)],
       declarations: [NavComponent],
       providers: [
         { provide: ConfigurationService, useValue: mockConfigService },
+        { provide: SSOConectorService, useValue: mockSSO },
       ],
-    }).compileComponents();
-  }));
+    });
+  });
 
   beforeEach(() => {
     fixture = TestBed.createComponent(NavComponent);
@@ -33,60 +41,155 @@ describe('NavComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should get enabled features from configuration service', () => {
-    // Given
-    const data = {
-      features: ['sales', 'documentation'],
-    };
-    mockConfigService.getConfig.and.returnValue(of(data));
+  describe('handles user authentication', () => {
+    beforeEach(() => {
+      const data = {
+        features: ['sales', 'documentation'],
+      };
+      mockConfigService.getConfig.and.returnValue(of(data));
+    });
 
-    // When
-    fixture.detectChanges();
+    describe('when user is logged in', () => {
+      beforeEach(() => {
+        // Given
+        userIsLoggedIn();
 
-    // Then
-    expect(component.features).toEqual(jasmine.arrayContaining(data.features));
+        // When
+        fixture.detectChanges();
+      });
+
+      it('should display nav bar menu', () => {
+        // Then
+        expect(
+          template.querySelector('[data-test="navbar-menu"]')
+        ).toBeTruthy();
+      });
+    });
+
+    describe('when user if NOT logged in', () => {
+      beforeEach(() => {
+        // Given
+        userIsLoggedOut();
+
+        // When
+        fixture.detectChanges();
+      });
+
+      it('should NOT display nav bar menu', () => {
+        // Then
+        expect(
+          template.querySelector('[data-test="navbar-menu"]')
+        ).not.toBeTruthy();
+      });
+    });
   });
 
-  it('should get logo from configuration service', () => {
-    // Given
-    const data = {
-      logoImageUrl: 'https://bulma.io/images/bulma-logo.png',
-    };
+  describe('configuration', () => {
+    beforeEach(() => {
+      userIsLoggedIn();
+    });
 
-    mockConfigService.getConfig.and.returnValue(of(data));
+    it('should get enabled features from configuration service', () => {
+      // Given
+      const data = {
+        features: ['sales', 'documentation'],
+      };
 
-    // When
-    fixture.detectChanges();
+      mockConfigService.getConfig.and.returnValue(of(data));
 
-    // Then
-    expect(component.logoUrl).toBe(data.logoImageUrl);
+      // When
+      fixture.detectChanges();
+
+      // Then
+      expect(component.features).toEqual(
+        jasmine.arrayContaining(data.features)
+      );
+    });
+
+    it('should get logo from configuration service', () => {
+      // Given
+      const data = {
+        logoImageUrl: 'https://bulma.io/images/bulma-logo.png',
+      };
+
+      mockConfigService.getConfig.and.returnValue(of(data));
+
+      // When
+      fixture.detectChanges();
+
+      // Then
+      expect(component.logoUrl).toBe(data.logoImageUrl);
+    });
+
+    it('#isFeatureEnabled', () => {
+      // Given
+      const data = {
+        features: ['documentation'],
+      };
+      mockConfigService.getConfig.and.returnValue(of(data));
+
+      fixture.detectChanges();
+
+      expect(component.isFeatureEnabled('sales')).toBe(false);
+      expect(component.isFeatureEnabled('documentation')).toBe(true);
+    });
+
+    it('should only have a link to enabled features', () => {
+      // Given
+      const data = {
+        features: ['documentation'],
+      };
+      mockConfigService.getConfig.and.returnValue(of(data));
+
+      fixture.detectChanges();
+
+      expect(
+        template.querySelector('[data-test="sales-link"]')
+      ).not.toBeTruthy();
+      expect(
+        template.querySelector('[data-test="documentation-link"]')
+      ).toBeTruthy();
+    });
   });
 
-  it('#isFeatureEnabled', () => {
-    // Given
-    const data = {
-      features: ['documentation'],
-    };
-    mockConfigService.getConfig.and.returnValue(of(data));
+  describe('actions', () => {
+    it('#logout should call SSO logout', () => {
+      // Given
+      userIsLoggedIn();
 
-    fixture.detectChanges();
+      spyOn(Util, 'windowReload').and.callFake(() => {});
 
-    expect(component.isFeatureEnabled('sales')).toBe(false);
-    expect(component.isFeatureEnabled('documentation')).toBe(true);
+      // When
+      component.logOut();
+
+      // Then
+      expect(mockSSO.logOut).toHaveBeenCalled();
+    });
   });
 
-  it('should only have a link to enabled features', () => {
-    // Given
-    const data = {
-      features: ['documentation'],
-    };
-    mockConfigService.getConfig.and.returnValue(of(data));
+  describe('a11y', () => {
+    it('images should be acessible', () => {
+      expect(template.querySelector('[data-test="logo-img"]')).toBeTruthy();
 
-    fixture.detectChanges();
-
-    expect(template.querySelector('[data-test="sales-link"]')).not.toBeTruthy();
-    expect(
-      template.querySelector('[data-test="documentation-link"]')
-    ).toBeTruthy();
+      const logoImage = template.querySelector(
+        '[data-test="logo-img"]'
+      ) as HTMLImageElement;
+      expect(logoImage.alt).toEqual('logo');
+    });
   });
 });
+
+// Helper funtions
+
+function userIsLoggedIn() {
+  spyOn(SSOConectorService, 'isLogged').and.returnValue({
+    tokenType: 'foo',
+    hash: 'foo',
+    expiresIn: 'foo',
+    refreshToken: 'foo',
+  });
+}
+
+function userIsLoggedOut() {
+  spyOn(SSOConectorService, 'isLogged').and.returnValue(null);
+}

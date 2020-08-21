@@ -1,23 +1,11 @@
 <nav class="navbar is-primary" role="navigation" aria-label="main navigation">
   <div class="navbar-brand">
     <a class="navbar-item" routerLink="home">
-      <img [src]="logoUrl" />
-    </a>
-
-    <a
-      role="button"
-      class="navbar-burger burger"
-      aria-label="menu"
-      aria-expanded="false"
-      data-target="navbarBasicExample"
-    >
-      <span aria-hidden="true"></span>
-      <span aria-hidden="true"></span>
-      <span aria-hidden="true"></span>
+      <img [src]="logoUrl" alt="logo" data-test="logo-img" />
     </a>
   </div>
 
-  <div id="navbarBasicExample" class="navbar-menu">
+  <div *ngIf="isLoggedIn" data-test="navbar-menu" class="navbar-menu">
     <div class="navbar-start">
       <a
         *ngIf="isFeatureEnabled('sales')"
@@ -41,11 +29,8 @@
     <div class="navbar-end">
       <div class="navbar-item">
         <div class="buttons">
-          <a class="button is-primary">
-            <strong>Sign up</strong>
-          </a>
-          <a class="button is-light">
-            Log in
+          <a class="button is-light" (click)="logOut()" (keyup)="logOut()">
+            Log out
           </a>
         </div>
       </div>

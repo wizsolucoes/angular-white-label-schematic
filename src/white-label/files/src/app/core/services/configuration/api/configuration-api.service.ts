@@ -2,15 +2,18 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { AppConfiguration } from '../configuration';
-import { environment } from '../../../../../environments/environment';
+import { EnvironmentService } from '../../environment/environment.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ConfigurationApiService {
-  constructor(private http: HttpClient) {}
+  constructor(
+    private http: HttpClient,
+    private environment: EnvironmentService
+  ) {}
 
   fetchConfig(): Observable<AppConfiguration> {
-    return this.http.get(`${environment.apiUrl}/config`);
+    return this.http.get(`${this.environment.apiUrl}/config`);
   }
 }

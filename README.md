@@ -7,10 +7,13 @@ Repositório para o Schematic para gerar código bolierplate com a [arquitetura 
 
 ```bash
 # Generate a new angular application
-ng new my-app
+ng new my-app --style=scss
+
+# Enter the directory
+cd my-app
 
 # Add white label arquitecture
 ng add @wizsolucoes/angular-white-label
 ```
 
-**IMPORTANTE: Este schematic deve ser executado em projetos novos, pois faz  a sobresrita de arquivos.**
+**IMPORTANTE: Este schematic supõe que a aplicação usa SASS e deve ser executado em projetos novos, pois faz a sobrescrita de arquivos.**

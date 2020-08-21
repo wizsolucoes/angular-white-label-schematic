@@ -8,7 +8,7 @@ import hostTenantMap from './core/services/configuration/host-to-tenant-map';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css'],
+  styleUrls: ['./app.component.scss'],
 })
 export class AppComponent implements OnInit {
   constructor(
@@ -28,8 +28,6 @@ export class AppComponent implements OnInit {
     this.configurationService.disableCache();
 
     this.loadConfiguration().subscribe((data: any) => {
-      console.log(`data: ${JSON.stringify(data)}`);
-
       this.themingService.setCSSVariables(this.el, data.theme);
       this.isLoadingConfiguration = false;
     });
