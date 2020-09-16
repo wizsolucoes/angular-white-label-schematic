@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 import { of, throwError } from 'rxjs';
-import getConfigApiResponse from '../../../../testing/api-responses/get-config.json';
+import getConfigApiResponse from '../../../../testing/fakes/api-responses/get-config.json';
 import { ConfigurationApiService } from './api/configuration-api.service';
 import { ConfigurationCacheService } from './cache/configuration-cache.service';
 import { ConfigurationService } from './configuration.service';

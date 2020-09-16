@@ -4,6 +4,6 @@ export default {
     'primary-color': '#1E88E5',
   },
   logoImageUrl:
-    'https://raw.githubusercontent.com/wizsolucoes/angular-whitelabel/master/docs/logowiz.png',
+    'https://raw.githubusercontent.com/wizsolucoes/angular-white-label/master/docs/logowiz.png',
   features: ['sales', 'documentation'],
 };
