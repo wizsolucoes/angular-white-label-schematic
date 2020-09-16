@@ -3,7 +3,7 @@ import { TestBed } from '@angular/core/testing';
 import { ConfigurationApiService } from './configuration-api.service';
 import { HttpClient } from '@angular/common/http';
 
-import getConfigApiResponse from '../../../../../testing/api-responses/get-config.json';
+import getConfigApiResponse from '../../../../../testing/fakes/api-responses/get-config.json';
 import { of } from 'rxjs';
 
 describe('ConfigurationApiService', () => {
