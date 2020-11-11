@@ -6,6 +6,7 @@ import { SSOConectorService, NgxWizSSOModule } from '@wizsolucoes/ngx-wiz-sso';
 import { ssoConfig } from '../../../../config/sso_config';
 import { Util } from '../../../shared/utils/util';
 import { fakeToken } from '../../../../testing/fakes/fake_token';
+import { MatToolbarModule } from '@angular/material/toolbar';
 
 describe('NavComponent', () => {
   let component: NavComponent;
@@ -22,7 +23,7 @@ describe('NavComponent', () => {
     mockSSO = jasmine.createSpyObj('mockSSO', ['logOut', 'checkLogged']);
 
     TestBed.configureTestingModule({
-      imports: [NgxWizSSOModule.forRoot(ssoConfig)],
+      imports: [ NgxWizSSOModule.forRoot(ssoConfig), MatToolbarModule ],
       declarations: [NavComponent],
       providers: [
         { provide: ConfigurationService, useValue: mockConfigService },
@@ -64,8 +65,8 @@ describe('NavComponent', () => {
       it('should display nav bar menu', () => {
         // Then
         expect(
-          template.querySelector('[data-test="navbar-menu"]')
-        ).toBeTruthy();
+          template.querySelector('[data-test="mat-toolbar"]').children.length
+        ).toBe(5);
       });
     });
 

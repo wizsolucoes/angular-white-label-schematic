@@ -1,8 +1,17 @@
-.navbar.is-primary {
-  background-color: var(--primary-color);
-  color: #fff;
+.navbar-spacer {
+  flex: 1 1 auto;
 }
 
-.button.is-primary {
-  filter: brightness(150%);
+.navbar-brand {
+  margin-right: 20px;
+
+  .navbar-item {
+    display: flex;
+    align-items: center;
+
+    img {
+      max-width: 45px;
+      max-height: 45px;
+    }
+  }
 }
