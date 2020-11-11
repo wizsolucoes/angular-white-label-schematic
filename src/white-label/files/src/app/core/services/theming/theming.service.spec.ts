@@ -30,10 +30,15 @@ describe('ThemingService', () => {
 
   it('should set properties on element', () => {
     // When
-    service.setCSSVariables(fixture, { primaryColor: 'teal' });
+    service.setCSSVariables(fixture, {
+      primaryColor: 'teal',
+      accentColor: 'pink'
+    });
 
     // Then
     expect(template.style.getPropertyValue('--primary-color')).toBe('teal');
+    expect(template.style.getPropertyValue('--accent-color')).toBe('pink');
     expect(template.style.getPropertyValue('--syz-primary-color')).toBe('teal');
+    expect(template.style.getPropertyValue('--syz-accent-color')).toBe('pink');
   });
 });

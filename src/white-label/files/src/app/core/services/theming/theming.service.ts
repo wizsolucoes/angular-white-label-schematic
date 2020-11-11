@@ -12,6 +12,11 @@ export class ThemingService {
     );
 
     el.nativeElement.style.setProperty(
+      `--accent-color`,
+      propertyMap.accentColor
+    );
+
+    el.nativeElement.style.setProperty(
       `--syz-primary-color`,
       propertyMap.primaryColor
     );
