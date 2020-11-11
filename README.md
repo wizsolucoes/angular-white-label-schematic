@@ -13,8 +13,10 @@
     - [ConfigurationCacheService](#configurationcacheservice)
     - [ConfigurationInMemoryService](#configurationinmemoryservice)
   - [Experimente](#experimente)
-    - [Instale as dependências](#instale-as-dependências)
-    - [Rodando o servidor de teste](#rodando-o-servidor-de-teste)
+    - [1. Configure os recursos](#1-configure-os-recursos)
+    - [2. Instale as dependências](#2-instale-as-dependências)
+    - [3. Rode o servidor de teste](#3-rode-o-servidor-de-teste)
+    - [4. Modifique a resposta do servidor de teste](#4-modifique-a-resposta-do-servidor-de-teste)
     - [Exemplos](#exemplos)
       - [Exemplo 1](#exemplo-1)
       - [Exemplo 2](#exemplo-2)
@@ -92,14 +94,18 @@ Serviço responsável por usar o **local storage** para buscar e guardar a confi
 Serviço responsável por buscar e guardar a configuração **em memória**.
 
 ### Experimente
-A aplicação angular *starter* faz uma requsição `GET` para `http://localhost:3000/config/:tenantId` para buscar a configuração. O projeto tem um [`json-server`](https://github.com/typicode/json-server) que pode ser usado para responder essa requisição.
+Depois de gerar uma aplicação Angular com a arquitetura white label. Siga estes passos para experimentar com a configuração.
 
-#### Instale as dependências
+#### 1. Configure os recursos
+Primeiramente, configure os [recursos](#estrutura-e-recursos) da aplicação, como a configuração de SSO.
+
+#### 2. Instale as dependências
 ```
 npm install
 ```
 
-#### Rodando o servidor de teste
+#### 3. Rode o servidor de teste
+A aplicação angular *starter* faz uma requisição `GET` para `http://localhost:3000/config` para buscar a configuração. O projeto tem um [`json-server`](https://github.com/typicode/json-server) que pode ser usado para responder essa requisição.
 
 Em um terminal rode o servidor:
 ```
@@ -111,17 +117,15 @@ Em outro terminal rode a aplicação Angular:
 npm start
 ```
 
-Para mudar as respostas do servidor e visualizar como a aplicação se comporta, modifique o arquivo [/server/db.json](./server/db.json) e atualiza a página do browser onde a aplicação está rodando.
+#### 4. Modifique a resposta do servidor de teste
+Para mudar as respostas do servidor e visualizar como a aplicação se comporta, modifique o arquivo `/server/db.json` e atualiza a página do browser onde a aplicação está rodando.
 
 #### Exemplos
 Repare nos exemplos a seguir como o tema, a logo e a disponibilidades de funcionalidades são configurados de acordo com o a url da aplicação e o conteúdo do arquivo [/server/db.json](./server/db.json).
 
 ##### Exemplo 1
-Se a aplicação estiver roando em http://localhost:4200/, o objeto de configuração que o servidor retorna é:
-
 ```json
 {
-  "id": 4200,
   "theme": {
     "primary-color": "teal"
   },
@@ -132,10 +136,8 @@ Se a aplicação estiver roando em http://localhost:4200/, o objeto de configura
 ![tela com tema bulma](./docs/theme_bulma.png "tela com tema bulma")
 
 ##### Exemplo 2
-Se a aplicação estiver roando em http://localhost:8080/, o objeto de configuração que o servidor retorna é:
 ```json
 {
-  "id": 8080,
   "theme": {
     "primary-color": "#1E88E5"
   },
@@ -147,7 +149,7 @@ Se a aplicação estiver roando em http://localhost:8080/, o objeto de configura
 
 
 ### Estrutura e recursos
-A estrutura da aplicação segue a estrutura da arquitetura de referência para aplicações Angular e tem os mesmos recursos. Leia mais aqui: https://github.com/wizsolucoes/angular-starter-schematic#sobre-a-aplicação-gerada
+A estrutura da aplicação segue a [estrutura da arquitetura de referência para aplicações Angular](https://github.com/wizsolucoes/angular-starter-schematic#sobre-a-aplicação-gerada) e tem os mesmos recursos. **Para alguns dos recursos é necessário fazer uma configuração antes de utilizar a aplicação**. Leia mais sobre a configuração dos recursos aqui: https://github.com/wizsolucoes/angular-starter-schematic#recursos.
 
 
 ## Desenvolvimento do schematic
