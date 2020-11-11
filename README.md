@@ -42,6 +42,9 @@ ng new my-app --style=scss
 # Enter the directory
 cd my-app
 
+# Add Wiz stylesheet
+npm i @wizsolucoes/ng-material-theme
+
 # Add white label arquitecture
 ng add @wizsolucoes/angular-white-label
 ```
@@ -184,6 +187,9 @@ ng new my-app --style=scss
 
 # Entrar na pasta da nova aplicação
 cd my-app
+
+# Adicionar folha de estilos Wiz
+npm i @wizsolucoes/ng-material-theme
 
 # Instalar schematic
 npm i --no-save ../path/to/angular-white-label-schematic/wizsolucoes-angular-white-label-1.0.1.tgz
