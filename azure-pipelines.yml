@@ -36,29 +36,39 @@ stages:
     condition: and(succeeded(), eq(variables['build.sourceBranch'], 'refs/heads/master'))
     dependsOn: [Build]
     jobs:
-      - job: Publish
-        displayName: "Publish"
-        condition: succeeded()
+      # - job: Publish
+      #   displayName: "Publish"
+      #   condition: succeeded()
+      #   steps:
+      #     - task: Npm@1
+      #       displayName: "Install dependencies"
+      #       inputs:
+      #         command: "install"
+      #     - task: Npm@1
+      #       displayName: "Build"
+      #       inputs:
+      #         command: custom
+      #         verbose: false
+      #         customCommand: "run build"
+      #     - task: Npm@1
+      #       displayName: "Test"
+      #       inputs:
+      #         command: "custom"
+      #         verbose: false
+      #         customCommand: "test"
+      #     - task: Npm@1
+      #       displayName: "Publish"
+      #       inputs:
+      #         command: "custom"
+      #         customCommand: "publish"
+      #         customEndpoint: "npmjs"
+      
+      - job: Deprecate
+        displayName: "Deprecate"
         steps:
           - task: Npm@1
-            displayName: "Install dependencies"
-            inputs:
-              command: "install"
-          - task: Npm@1
-            displayName: "Build"
-            inputs:
-              command: custom
-              verbose: false
-              customCommand: "run build"
-          - task: Npm@1
-            displayName: "Test"
+            displayName: "Deprecate @wizsolucoes/angular-white-label"
             inputs:
               command: "custom"
-              verbose: false
-              customCommand: "test"
-          - task: Npm@1
-            displayName: "Publish"
-            inputs:
-              command: "custom"
-              customCommand: "publish"
+              customCommand: "deprecate @wizsolucoes/angular-white-label \"Pacote descontinuado. Utilize o '@wizsolucoes/angular-starter' para iniciar novas aplicações white label.\""
               customEndpoint: "npmjs"
