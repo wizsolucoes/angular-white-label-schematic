@@ -1,5 +1,5 @@
 <!-- omit in toc -->
-# Wiz Angular White Label Schematic
+# Wiz Angular White Label Schematic (**Deprecated**)
 
 - [Sobre](#sobre)
 - [Uso](#uso)
@@ -32,6 +32,8 @@
 Schematic para gerar código boilerplate com a [arquitetura de referência para aplicações Angular "white label"](https://github.com/wizsolucoes/angular-white-label).
 
 Compatível com as [versões suportadas do Angular](https://angular.io/guide/releases#support-policy-and-schedule) (^8.0.0, ^9.0.0 e ^10.0.0) e otimizado para as versões ^10.0.0.
+
+A biblioteca foi descontinuada. Utilize o [Angular Starter](https://github.com/wizsolucoes/angular-starter-schematic) para iniciar novas aplicações white label.
 
 ## Uso
 
